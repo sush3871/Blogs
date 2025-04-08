@@ -18,13 +18,13 @@ def blog_create(request):
     if request.method == 'POST':
         form = BlogForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save(commit=False)
-            form.user = request.user
-            form.save()
+            blog = form.save(commit=False)  # Save the form but don't commit yet
+            blog.user = request.user       # Assign the user properly
+            blog.save()
             return redirect('blog_list')
     else:
         form = BlogForm()
-    return render(request, 'myapp/blog_create.html', {'form': form})
+    return render(request, 'myapp/blog_form.html', {'form': form})
 
 # Blog Update
 def blog_edit(request, blog_id):
@@ -38,7 +38,7 @@ def blog_edit(request, blog_id):
             return redirect('blog_list')
     else:
         form = BlogForm(instance=blog)
-        return render(request, 'myapp/blog_edit.html', {'form': form})
+        return render(request, 'myapp/blog_form.html', {'form': form})
     
 # Blog Delete
 def blog_delete(request, blog_id):
@@ -49,6 +49,6 @@ def blog_delete(request, blog_id):
     return render(request, 'myapp/blog_delete.html', {'blog': blog})
 
 # Blog Detail
-def blog_detail(request, pk):
-    blog = get_object_or_404(Blog, pk=pk)
-    return render(request, 'myapp/blog_detail.html', {'blog': blog})
+# def blog_detail(request, pk):
+#     blog = get_object_or_404(Blog, pk=pk)
+#     return render(request, 'myapp/blog_detail.html', {'blog': blog})

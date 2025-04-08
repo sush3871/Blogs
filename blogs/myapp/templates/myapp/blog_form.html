@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home | Blogs
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="text-center text-white mt-5">Blogs Lists</h1>
+
+    <h2>{% if form.instance.id %} Edit Blog {% else %} Create Blog {% endif %}</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-warning">Save</button>
+    </form>
+    <a href="{% url 'blog_list' %}" class="btn btn-secondary mt-3">Back to List</a>
+
+{% endblock %}

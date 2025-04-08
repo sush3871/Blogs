@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home | Blogs
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="text-center text-white mt-5">Are you sure that you want to sure delete</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'blog_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+
+{% endblock %}
