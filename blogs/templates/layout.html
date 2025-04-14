@@ -50,6 +50,16 @@
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                   <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
+                <a href="{% url 'blog_list' %}" class="mx-2 btn btn-outline-success">Blogs Home</a>
+                {% if user.is_authenticated %}
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="mx-2 btn btn-outline-danger">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="mx-2 btn btn-outline-success">Login</a>
+                    <a href="{% url 'register' %}" class="mx-2 btn btn-outline-success">Register</a>
+                {% endif %}
               </div>
             </div>
           </nav>
